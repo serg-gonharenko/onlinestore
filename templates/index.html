@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title%}Default title{% endblock %}</title>
+{#    <style>#}
+{#        a#}
+{#        {#}
+{#            display: block;#}
+{#            float: right;#}
+{#            margin-right: 25px;#}
+{#            padding: 10px 50px;#}
+{#            color: black;#}
+{##}
+{#            border-radius: 10px;#}
+{#            border: 1px solid black;#}
+{#            text-decoration: none;#}
+{#            transition: color 0.5s, background 0.5s;#}
+{##}
+{#        }#}
+{##}
+{#        a:hover#}
+{#        {#}
+{#            color: white;#}
+{#            background: blue;#}
+{#            border: 1px solid blue;#}
+{#        }#}
+{#    </style>#}
+
+</head>
+
+<div>
+    <h1>«Роги та копита»</h1>
+    <hr>
+    <a href="/">Головна</a>
+    <a href="/about">Про магазин</a>
+    <a href="/about">Корзина</a>
+    <hr>
+</div>
+<body>
+
+<div class="container">
+    {% block container %}{% endblock %}
+</div>
+
+</body>
+</html>
