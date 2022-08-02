@@ -27,13 +27,34 @@ context = {
             "first_name": "Serhii",
             "last_name": "Horodilov"
         },
+        {
+            "id": 2,
+            "username": "serhhoncharenko",
+            "first_name": "Serhii",
+            "last_name": "Honcharenko"
+        },
     ],
 }
 
 
 def homepage(request: HttpRequest) -> HttpResponse:
-    return render(request, "homepage.html", context)
+    current_user = "serhhoncharenko"
+    users_list = context["users_list"]
+    for registered_user in users_list:
+        if current_user == registered_user["username"]:
+            home_context = {"goods_list": context["goods_list"],
+                            "username": current_user}
+            return render(request, "homepage.html", home_context)
+    home_context = {"goods_list": context["goods_list"],
+                        "username": "Anonimus"}
+    return render(request, "homepage.html", home_context)
 
 
 def about(request: HttpRequest) -> HttpResponse:
     return render(request, "about.html")
+
+
+def product_about(request: HttpRequest, product_slug) -> HttpResponse:
+    show_prod = [x for x in context["goods_list"] if x["slug"] == product_slug]
+    show_prod_dict = {"title": show_prod[0]["product"], "data": show_prod[0]}
+    return render(request, "product_about.html", show_prod_dict)

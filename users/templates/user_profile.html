@@ -1,14 +1,11 @@
 {% extends "index.html" %}
 {% block title %}"РтК" Головна{% endblock %}
 {% block container %}
-{#    <div>{{ goods_list }}</div>#}
-    {% for user in users_list %}
-        <h2>
-            {{ user.first_name }}
-            {{ user.last_name }}
-        </h2>
-        <hr>
-    {% endfor %}
+    <h2>
+        {{ first_name }}
+        {{ last_name }}
+    </h2>
+    <hr>
     <div>
         <p>Всього замовлень: 0</p>
         <p>Виконано: 0</p>

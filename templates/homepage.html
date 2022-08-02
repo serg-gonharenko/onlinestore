@@ -1,14 +1,12 @@
 {% extends "index.html" %}
 {% block title %}"РтК" Головна{% endblock %}
 {% block container %}
-{#    <div>{{ goods_list }}</div>#}
     {% for goods in goods_list %}
         <p>
-            <a href="/about">{{ goods.product }}</a>
+            <a href="{{ goods.slug }}/">{{ goods.product }}</a>
             {{ goods.price }}
         </p>
         <p></p>
         <hr>
     {% endfor %}
-
 {% endblock %}
