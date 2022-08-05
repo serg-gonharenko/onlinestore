@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     # 3-rd party
 
     # Custom
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
+    'goods.apps.GoodsConfig',
 
 ]
 
