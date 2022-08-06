@@ -3,7 +3,7 @@
 {% block container %}
     {% for goods in goods_list %}
         <p>
-            <a href="{{ goods.slug }}/">{{ goods.product }}</a>
+            <a href="{% url 'product_about_url' product_slug=goods.slug %}"> {{goods.product}}</a>
             {{ goods.price }}
         </p>
         <p></p>
