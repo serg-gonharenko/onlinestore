@@ -25,3 +25,5 @@ class Products(models.Model):
     description = models.TextField(null=True, blank=True)
     category = models.ForeignKey(Categories, on_delete=models.PROTECT)
 
+    def __str__(self):
+        return f"{self.name}"
