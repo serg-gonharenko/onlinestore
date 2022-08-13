@@ -1,11 +1,11 @@
 {% extends "index.html" %}
 {% block title %}{{ title }}{% endblock %}
 {% block container %}
-    <h1>{{ data.product }} </h1>
-    <div>{{ data.description }}</div>
-    <h2>Ціна: {{ data.price }} </h2>
+    <h1>{{ object.name }} </h1>
+    <div>{{ object.description }}</div>
+    <h2>Ціна: {{ object.price }} </h2>
     Наявність:
-    {% if data.available %}
+    {% if object.quantity %}
         <pr style="color:green">є в наявності</pr>
         <br><br>
         <input type="submit" value="Придбати">

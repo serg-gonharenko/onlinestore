@@ -1,4 +1,4 @@
-from django.http import HttpRequest, HttpResponse, HttpResponseNotFound, Http404
+from django.http import HttpRequest, HttpResponse, Http404
 from django.shortcuts import render
 from onlinestore.views import context
 

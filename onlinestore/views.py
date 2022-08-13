@@ -1,25 +1,7 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-
+from goods.views import all_products_list_view
 context = {
-    "goods_list": [
-        {
-            "id": 1,
-            "product": "Canon E500",
-            "slug": "canon-e500",
-            "available": False,
-            "description": "some product description",
-            "price": 50000.00,
-        },
-        {
-            "id": 2,
-            "product": "Sony A7III",
-            "slug": "sony-a7iii",
-            "available": True,
-            "description": "some product description",
-            "price": 75999.99
-        },
-    ],
     "users_list": [
         {
             "id": 1,
@@ -35,22 +17,32 @@ context = {
         },
     ],
 }
+# TODO: вынести проверку пользователя в отдельную фунцию check_user и добавить в контекст страниц только словать или
+#  на следующей домашке сделать как положено через Логин
 
 
 def homepage(request: HttpRequest) -> HttpResponse:
     current_user = "serhhoncharenko"
     users_list = context["users_list"]
+    qs = all_products_list_view(request)
     for registered_user in users_list:
         if current_user == registered_user["username"]:
-            home_context = {"goods_list": context["goods_list"],
-                            "username": current_user}
+            home_context = {"username": current_user}
+            home_context.update(qs)
             return render(request, "homepage.html", home_context)
-    home_context = {"goods_list": context["goods_list"],
-                        "username": "Anonimus"}
+    home_context = {"username": "Anonimus"}
+    home_context.update(qs)
     return render(request, "homepage.html", home_context)
 
 
 def about(request: HttpRequest) -> HttpResponse:
-    return render(request, "about.html")
+    current_user = "serhhoncharenko"
+    users_list = context["users_list"]
+    for registered_user in users_list:
+        if current_user == registered_user["username"]:
+            about_context = {"username": current_user}
+            return render(request, "about.html", about_context)
+    about_context = {"username": "Anonimus"}
+    return render(request, "about.html", about_context)
 
 

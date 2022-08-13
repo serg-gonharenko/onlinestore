@@ -1,0 +1,14 @@
+{% for object in products_list %}
+    <h2><a href="{% url "product_about_url" product_slug=object.slug %}"> {{ object.name }}</a></h2>
+    Ціна: {{ object.price }}
+    <br>
+    Наявність:
+    {% if object.quantity %}
+        <pr style="color:green">є в наявності</pr>
+        <br>
+    {% else %}
+        <pr style="color:red">під замовлення</pr>
+        <br>
+    {%  endif %}
+    <br>
+{% endfor %}
