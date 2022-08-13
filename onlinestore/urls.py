@@ -19,8 +19,9 @@ from onlinestore import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homepage),
+    path('', views.homepage, name="homepage"),
     path('about/', views.about),
+    path('login/', include('users.urls')),
     path('profile/', include('users.urls')),
     path('products/', views.homepage),
     path('products/', include('goods.urls')),
