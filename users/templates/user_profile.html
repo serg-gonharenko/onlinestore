@@ -1,15 +1,22 @@
 {% extends "index.html" %}
 {% block title %}"РтК" Головна{% endblock %}
 {% block container %}
+
     <h2>
-        {{ first_name }}
-        {{ last_name }}
+        <div>Профіль користувача</div>
     </h2>
+
+    <div> <b>Логін: </b>{{ user }} </div>
+    <div> <b>ім'я: </b>{{ user.first_name }} {{ user.last_name }} </div>
+    <div> <b>Email: </b>{{ user.email }} </div>
+
     <hr>
+
     <div>
         <p>Всього замовлень: 0</p>
         <p>Виконано: 0</p>
         <p>На суму: 0</p>
         <p>Скасовано: 0</p>
     </div>
+
 {% endblock %}

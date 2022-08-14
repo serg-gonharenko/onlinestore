@@ -1,17 +1,14 @@
-from django.http import HttpRequest, HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
-from onlinestore.views import context
 
-# TODO переписать user_profile
-def user_profile(request: HttpRequest, username: str) -> HttpResponse:
-    users_list = context["users_list"]
-    for logged_user in users_list:
-        if username == logged_user["username"]:
-            return render(request, "user_profile.html", logged_user)
-    raise Http404("Немає такого користувача")
+def user_profile(request: HttpRequest) -> HttpResponse:
+    """User profile view"""
+    if request.user.is_authenticated:
+        return render(request, "user_profile.html")
+    return HttpResponseRedirect(reverse_lazy("login"))
 
 
 def login_view(request: HttpRequest) -> HttpResponse:
@@ -25,3 +22,8 @@ def login_view(request: HttpRequest) -> HttpResponse:
         login(request, user)
         return HttpResponseRedirect(reverse_lazy("homepage"))
     return render(request, "user_login.html")
+
+
+def logout_view(request: HttpRequest) -> HttpResponse:
+    logout(request)
+    return HttpResponseRedirect(reverse_lazy("homepage"))
