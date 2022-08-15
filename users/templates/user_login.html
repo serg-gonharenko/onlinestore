@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+{% block title %} Login Page{% endblock %}
+{% block container %}
+    <br>
+    <h2>Введіть логін та пароль</h2>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        <input id="username" name="username" type="text">
+        <input id="password" name="password" type="password">
+        <input type="Submit">
+    </form>
+{% endblock %}
