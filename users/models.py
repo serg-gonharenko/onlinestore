@@ -1,5 +1,6 @@
-import datetime
-
+"""
+User application models
+"""
 from django.db import models
 import datetime
 
