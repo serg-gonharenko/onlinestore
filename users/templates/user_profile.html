@@ -3,12 +3,17 @@
 {% block container %}
 
     <h2>
-        <div>Профіль користувача</div>
+        Профіль користувача
     </h2>
 
     <div> <b>Логін: </b>{{ user }} </div>
-    <div> <b>ім'я: </b>{{ user.first_name }} {{ user.last_name }} </div>
+    <div> <b>Ім'я: </b>{{ user.first_name }} </div>
+    <div> <b>Прізвище: </b>{{ user.last_name }} </div>
     <div> <b>Email: </b>{{ user.email }} </div>
+
+    <br>
+
+    <a href="{% url "profile_edit" %}">Редагувати дані</a>
 
     <hr>
 

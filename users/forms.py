@@ -56,3 +56,14 @@ class LoginForm(forms.Form):
         if self.user is None:
             message = "Неправильні ім'я користувача або пароль"
             raise ValidationError(message)
+
+
+class ProfileEdit(forms.Form):
+    """Form for edit User data"""
+
+    first_name = forms.CharField(max_length=64, label="Ім'я")
+    last_name = forms.CharField(max_length=64, label="Прізвище")
+    email = forms.EmailField(label="email")
+
+    def save(self, user):
+        UserModel.objects.filter(pk=user.pk).update(**self.cleaned_data)
