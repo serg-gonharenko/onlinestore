@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+{% block container %}
+    <form method="post">
+        {% csrf_token %}
+        <div>Ви впевнені, що бажаєте видалити {{ object }}?</div>
+        <input type="submit" value="Видалити">
+        <a href="{% url "goods:detail" slug=object.slug %}">Скасувати</a>
+    </form>
+{% endblock %}

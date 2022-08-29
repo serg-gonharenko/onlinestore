@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+{% block container %}
+    {% for object in object_list %}
+        <a href="{% url "goods:detail" slug=object.slug %}">{{ object }}</a>
+        <p>
+        Цена: {{ object.price }}
+        </p>
+        {% if object.quantity %}
+            <p style="color: green">
+            В наявності: {{ object.quantity }}
+            </p>
+        {% else %}
+            <p style="color: red">
+            Під замовлення:
+            </p>
+        {% endif %}
+        <hr>
+    {% endfor %}
+    <a href="{% url "goods:create" %}"> Create new</a>
+{% endblock %}

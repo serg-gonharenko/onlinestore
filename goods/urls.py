@@ -1,6 +1,11 @@
 from django.urls import path
-from goods.views import product_about
+from goods import views
 
+app_name = "goods"
 urlpatterns = [
-    path('<slug:product_slug>/', product_about, name='product_about_url'),
-        ]
+    path("", views.products_list_view, name="list"),
+    path("create/", views.products_create_view, name="create"),
+    path("<slug:slug>/", views.products_detail_view, name="detail"),
+    path("<slug:slug>/update/", views.products_update_view, name="update"),
+    path("<slug:slug>/delete/", views.products_delete_view, name="delete"),
+]
