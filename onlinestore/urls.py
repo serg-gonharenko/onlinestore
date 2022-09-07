@@ -23,7 +23,6 @@ urlpatterns = [
     path('', include('users.urls')),
     path('', include('goods.urls')),
     path('', views.homepage, name="homepage"),
-
     path('products/', views.homepage),
 
 ]

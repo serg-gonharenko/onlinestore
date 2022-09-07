@@ -39,14 +39,14 @@ class RegisterModelForm(forms.ModelForm):
         UserModel.objects.create_user(username, email, password)
 
 
-class ProfileEdit(forms.Form):
+class ProfileEditModelForm(forms.ModelForm):
     """Form for edit User data"""
+    class Meta:
+        model = UserModel
+        fields = ("username", "first_name", "last_name", "email")
 
-    first_name = forms.CharField(max_length=64, label="Ім'я")
-    last_name = forms.CharField(max_length=64, label="Прізвище")
-    email = forms.EmailField(label="email")
-
-    def save(self, user):
+    def save(self):
+        pass
         UserModel.objects.filter(pk=user.pk).update(**self.cleaned_data)
 
 

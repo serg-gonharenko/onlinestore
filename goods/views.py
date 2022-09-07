@@ -4,6 +4,7 @@ from goods.models import Products, Categories
 from goods.forms import ProductsForm
 from django.urls import reverse
 
+
 def products_list_view(request: HttpRequest) -> HttpResponse:
     cont = Products.objects.all()
     context = {"object_list": Products.objects.all()}

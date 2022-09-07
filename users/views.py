@@ -1,9 +1,10 @@
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth import authenticate, login, logout, forms
 from django.contrib.auth.models import User
-from users.forms import ProfileEdit, LoginModelForm, RegisterModelForm
+from users.forms import LoginModelForm, RegisterModelForm, ProfileEditModelForm
+from users.models import UserModel
 
 
 def user_profile_view(request: HttpRequest) -> HttpResponse:
@@ -14,15 +15,25 @@ def user_profile_view(request: HttpRequest) -> HttpResponse:
 
 
 def user_profile_edit_view(request: HttpRequest) -> HttpResponse:
+    try:
+        instance = UserModel.objects.get(username=request.user.username)
+    except User.DoesNotExist:
+        raise Http404()
     if request.method == "POST":
         if request.user.is_authenticated:
-            form = ProfileEdit(request.POST)
+            form = ProfileEditModelForm(instance=instance, data=request.POST)
             if form.is_valid():
-                form.save(request.user)
+                form.save()
+                # form.save(request.user)
                 return HttpResponseRedirect(reverse_lazy("user_profile"))
-            return render(request, "user_profile_edit.html", {'form': form})
-        return HttpResponseRedirect(reverse_lazy("user_login"))
-    return HttpResponseRedirect(reverse_lazy("homepage"))
+    else:
+        form = ProfileEditModelForm(instance=instance)
+
+    return render(request, "user_profile_edit.html", {'form': form})
+
+    # return render(request, "user_profile_edit.html", {'form': form})
+    #     return HttpResponseRedirect(reverse_lazy("user_login"))
+    # return HttpResponseRedirect(reverse_lazy("homepage"))
 
 
 def login_view(request: HttpRequest) -> HttpResponse:
