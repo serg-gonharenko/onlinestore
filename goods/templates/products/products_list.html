@@ -1,20 +1,30 @@
 {% extends "base.html" %}
+{% load static %}
 {% block container %}
-    {% for object in object_list %}
-        <a href="{% url "goods:detail" slug=object.slug %}">{{ object }}</a>
-        <p>
-        Цена: {{ object.price }}
-        </p>
+<div class="row row-cols-4">
+  {% for object in object_list %}
+    <div class="col mb-5">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{% static '258184_original.jpg' %} " alt="goods/258184_original.jpg">
+        <div class="card-body">
+          <h5 class="card-title">{{ object.name }}</h5>
+          <p class="card-text">Цена: {{ object.price }}</p>
         {% if object.quantity %}
-            <p style="color: green">
-            В наявності: {{ object.quantity }}
-            </p>
-        {% else %}
+          <p style="color: green">
+          В наявності: {{ object.quantity }}
+          </p>
+
+          <a class="btn btn-success" href="{% url 'goods:detail' slug=object.slug %}">Купити</a>
+          {% else %}
             <p style="color: red">
-            Під замовлення:
+            Під замовлення
             </p>
+            <a class="btn btn-success disabled"  href="{% url 'goods:detail' slug=object.slug %}">Купити</a>
+
         {% endif %}
-        <hr>
-    {% endfor %}
-    <a href="{% url "goods:create" %}"> Create new</a>
+            </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
 {% endblock %}
