@@ -1,4 +1,4 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
 {% block container %}
     {% for object in object_list %}
         <a href="{% url "goods:detail" slug=object.slug %}">{{ object }}</a>

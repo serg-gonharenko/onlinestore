@@ -3,8 +3,12 @@
 {% block container %}
     <h2>Введіть дані для реєстрації</h2>
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-    <input type="Submit" value="Реєструватися">
+
+                {{ form.as_p }}
+
+
+{#        {% csrf_token %}#}
+{#        {{ form.as_p}}#}
+{#    <input type="Submit" value="Реєструватися">#}
     </form>
 {% endblock %}
