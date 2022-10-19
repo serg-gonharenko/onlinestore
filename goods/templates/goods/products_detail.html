@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block container %}
     {{ object }}
-
+    <br>
+    Цена: {{ object.price }}
+    <br>
     <a href="{% url 'goods:update' slug=object.slug  %}">Edit</a>
     <a href="{% url 'goods:delete' slug=object.slug  %}">Delete</a>
 {% endblock %}

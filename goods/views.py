@@ -3,18 +3,27 @@ from django.shortcuts import render
 from goods.models import Products, Categories
 from goods.forms import ProductsForm
 from django.urls import reverse
+from django.views.generic import ListView, DetailView
+
+
+class ProductsListView(ListView):
+    model = Products
+
+
+class ProductsDetailView(DetailView):
+    model = Products
 
 
 def products_list_view(request: HttpRequest) -> HttpResponse:
     cont = Products.objects.all()
     context = {"object_list": Products.objects.all()}
-    return render(request, "products/products_list.html", context)
+    return render(request, "goods/products_list.html", context)
 
 
 def products_detail_view(request: HttpRequest, slug: str) -> HttpResponse:
     try:
         context = {"object": Products.objects.get(slug=slug)}
-        return render(request, "products/products_detail.html", context)
+        return render(request, "goods/products_detail.html", context)
     except Products.DoesNotExist:
         raise Http404("Немає такого товару")
 
@@ -29,7 +38,7 @@ def products_create_view(request: HttpRequest) -> HttpResponse:
     else:
         form = ProductsForm()
 
-    return render(request, "products/products_form.html", {"form": form})
+    return render(request, "goods/products_form.html", {"form": form})
 
 
 def products_update_view(request: HttpRequest, slug: str) -> HttpResponse:
@@ -46,7 +55,7 @@ def products_update_view(request: HttpRequest, slug: str) -> HttpResponse:
     else:
         form = ProductsForm(instance=instance)
 
-    return render(request, "products/products_form.html", {"form": form})
+    return render(request, "goods/products_form.html", {"form": form})
 
 
 def products_delete_view(request: HttpRequest, slug: str) -> HttpResponse:
@@ -60,5 +69,5 @@ def products_delete_view(request: HttpRequest, slug: str) -> HttpResponse:
         return HttpResponseRedirect(redirect_url)
 
     return render(
-        request, "products/products_confirm_delete.html", {"object": instance}
+        request, "goods/products_confirm_delete.html", {"object": instance}
     )
