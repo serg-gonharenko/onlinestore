@@ -1,5 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
   <div class="collapse navbar-collapse ">
+    <div>" "</div>
     <a class="navbar-brand" >Роги та копита</a>
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav">
@@ -17,13 +18,15 @@
           {{ user }}
         </span>
         <div>" "</div>
-        <a class="btn btn-primary" href="{% url 'users:profile' %}" role="button">Profile</a>
+        <a class="btn btn-success" href="{% url 'users:profile' %}" role="button">Profile</a>
         <div>" "</div>
-        <a class="btn btn-primary" href="{% url 'users:logout' %}" role="button">Log Out</a>
+        <a class="btn btn-success" href="{% url 'users:logout' %}" role="button">Log Out</a>
+        <div>" "</div>
       {% else %}
-        <a class="btn btn-primary" href="{% url 'users:login' %}" role="button">Log In</a>
+        <a class="btn btn-success" href="{% url 'users:login' %}" role="button">Log In</a>
         <div>" "</div>
-        <a class="btn btn-primary" href="{% url 'users:register' %}" role="button">Register</a>
+        <a class="btn btn-success" href="{% url 'users:register' %}" role="button">Register</a>
+        <div>" "</div>
       {% endif %}
     </div>
   </div>

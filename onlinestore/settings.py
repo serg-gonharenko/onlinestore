@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # 3-rd party
+    "crispy_forms",
+    "crispy_bootstrap5",
 
     # Custom
     'users.apps.UsersConfig',
@@ -73,6 +75,10 @@ TEMPLATES = [
         },
     },
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 WSGI_APPLICATION = 'onlinestore.wsgi.application'
 

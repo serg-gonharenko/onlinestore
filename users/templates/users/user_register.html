@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block title %}"РтК" Реєстрація{% endblock %}
 {% block container %}
     <h2>Введіть дані для реєстрації</h2>
     <form method="post">
 
-                {{ form.as_p }}
+                {{ form|crispy }}
 
 
 {#        {% csrf_token %}#}
