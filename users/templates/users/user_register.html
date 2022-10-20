@@ -4,12 +4,10 @@
 {% block container %}
     <h2>Введіть дані для реєстрації</h2>
     <form method="post">
-
-                {{ form|crispy }}
-
-
-{#        {% csrf_token %}#}
-{#        {{ form.as_p}}#}
-{#    <input type="Submit" value="Реєструватися">#}
+      {% csrf_token %}
+      {{ form|crispy }}
+      <input class="btn btn-success" type="submit" value="Реєструватися">
+      <input class="btn btn-success" type="reset" value="Очистити">
+      <a class="btn btn-success"  href="{% url 'homepage' %}" role="button">Скасувати</a>
     </form>
 {% endblock %}

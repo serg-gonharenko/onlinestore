@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic import CreateView
+from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from .forms import CustomUserCreationForm
 
 
@@ -19,4 +19,8 @@ class CustomRegisterView(CreateView):
 
 
 class CustomLogoutView(LoginRequiredMixin, LogoutView):
+    next_page = '/'
+
+
+class CustomProfileView(LoginRequiredMixin, FormView):
     next_page = '/'

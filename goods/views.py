@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView
 
 
 class ProductsListView(ListView):
+    paginate_by = 2
     model = Products
 
 

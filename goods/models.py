@@ -7,6 +7,7 @@ class Categories(models.Model):
     slug = models.SlugField(max_length=32, unique=True)
     name = models.CharField(max_length=32)
     description = models.TextField(null=True, blank=True)
+    product_img = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.pk}. {self.name}"
@@ -18,6 +19,7 @@ class Products(models.Model):
     price = models.PositiveIntegerField(default=0)
     quantity = models.PositiveIntegerField(default=0)
     description = models.TextField(null=True, blank=True)
+    product_img = models.ImageField(null=True, blank=True)
     category = models.ForeignKey(Categories, on_delete=models.PROTECT)
 
     class Meta:

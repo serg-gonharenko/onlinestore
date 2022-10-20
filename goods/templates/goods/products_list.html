@@ -14,17 +14,43 @@
           В наявності: {{ object.quantity }}
           </p>
 
-          <a class="btn btn-success" href={% url 'goods:detail' pk=object.pk %}>Купити</a>
+          <a class="btn btn-success" href="{% url 'goods:detail' pk=object.pk %}">Купити</a>
           {% else %}
             <p style="color: red">
             Під замовлення
             </p>
-            <a class="btn btn-success disabled"  href={% url 'goods:detail' pk=object.pk %}">Купити</a>
+            <a class="btn btn-success disabled"  href="{% url 'goods:detail' pk=object.pk %}">Купити</a>
 
         {% endif %}
-            </div>
+        {% if user.is_staff %}
+          <a href="{% url 'goods:update' slug=object.slug  %}">Edit</a>
+          <a href="{% url 'goods:delete' slug=object.slug  %}">Delete</a>
+        {% endif %}
+        </div>
       </div>
     </div>
   {% endfor %}
-</div>
+  </div>
+  {% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in page_obj.paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+  {% endif %}
+
 {% endblock %}

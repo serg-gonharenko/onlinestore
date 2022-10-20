@@ -4,6 +4,8 @@
     <br>
     Цена: {{ object.price }}
     <br>
-    <a href="{% url 'goods:update' slug=object.slug  %}">Edit</a>
-    <a href="{% url 'goods:delete' slug=object.slug  %}">Delete</a>
+    {% if user.is_staff %}
+        <a href="{% url 'goods:update' slug=object.slug  %}">Edit</a>
+        <a href="{% url 'goods:delete' slug=object.slug  %}">Delete</a>
+    {% endif %}
 {% endblock %}
