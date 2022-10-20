@@ -18,7 +18,7 @@
           {{ user }}
         </span>
         <div>" "</div>
-        <a class="btn btn-success" href="{% url 'users:profile' %}" role="button">Profile</a>
+        <a class="btn btn-success" href="{% url 'users:profile' pk=user.pk %}" role="button">Profile</a>
         <div>" "</div>
         <a class="btn btn-success" href="{% url 'users:logout' %}" role="button">Log Out</a>
         <div>" "</div>
