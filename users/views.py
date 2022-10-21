@@ -37,3 +37,9 @@ class CustomEditView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return self.success_url
+
+
+class CustomDeleteView(LoginRequiredMixin, DeleteView):
+    model = CustomUserModel
+    template_name = 'users/user_confirm_delete.html'
+    success_url = '/'
