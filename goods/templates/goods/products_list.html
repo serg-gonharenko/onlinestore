@@ -23,13 +23,18 @@
 
         {% endif %}
         {% if user.is_staff %}
-          <a href="{% url 'goods:update' slug=object.slug  %}">Edit</a>
-          <a href="{% url 'goods:delete' slug=object.slug  %}">Delete</a>
+          <br>
+          <br>
+          <a class="btn btn-success" href="{% url 'goods:update' pk=object.pk %}">Редагувати</a>
+          <a class="btn btn-success" href="{% url 'goods:delete' pk=object.pk %}">Видалити</a>
         {% endif %}
         </div>
       </div>
     </div>
   {% endfor %}
+  {% if user.is_staff %}
+    <a class="btn btn-success" href="{% url 'goods:create'%}">Додати новий товар</a>
+  {% endif %}
   </div>
   {% if is_paginated %}
   <div class="card-footer text-end p-3">

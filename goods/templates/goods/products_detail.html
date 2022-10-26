@@ -1,11 +1,7 @@
 {% extends "base.html" %}
 {% block container %}
-    {{ object }}
+    <h2>{{object.name}}</h2>
     <br>
     Цена: {{ object.price }}
     <br>
-    {% if user.is_staff %}
-        <a href="{% url 'goods:update' slug=object.slug  %}">Edit</a>
-        <a href="{% url 'goods:delete' slug=object.slug  %}">Delete</a>
-    {% endif %}
 {% endblock %}
