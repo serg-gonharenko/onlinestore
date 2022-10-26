@@ -1,18 +1,22 @@
 {% extends "base.html" %}
 {% block title %}"РтК" Головна{% endblock %}
 {% block container %}
+
     <h2>
         Профіль користувача
     </h2>
+
     <div> <b>Логін: </b>{{ user }} </div>
     <div> <b>Ім'я: </b>{{ user.first_name }} </div>
     <div> <b>Прізвище: </b>{{ user.last_name }} </div>
     <div> <b>Email: </b>{{ user.email }} </div>
-    <div> <b>Joined at: </b>{{ user.date_joined }} </div>
+
     <br>
-    <a class="btn btn-success" href="{% url 'users:edit' pk=user.pk %}">Редагувати дані</a>
-    <a class="btn btn-success" href="{% url 'users:delete' pk=user.pk %}">Вилучити</a>
+
+    <a href="{% url 'users:edit' pk=user.pk %}">Редагувати дані</a>
+
     <hr>
+
     <div>
         <p>Всього замовлень: 0</p>
         <p>Виконано: 0</p>

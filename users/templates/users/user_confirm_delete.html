@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-{% block title %}Delete{% endblock %}
-{% block container %}
-<form method="post">{% csrf_token %}
-    <p>Ви впевнені, видалити користувача "{{object}}"?</p>
-    <input class="btn btn-success" type="Submit" value="Видалити">
-    <a class="btn btn-success"  href="{% url 'homepage' %}" role="button">Скасувати</a>
-</form>
-{% endblock %}
