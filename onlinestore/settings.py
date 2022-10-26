@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
 
     # Custom
-    'users.apps.UsersConfig',
-    'goods.apps.GoodsConfig',
+    'users',
+    'goods',
 
 ]
 
