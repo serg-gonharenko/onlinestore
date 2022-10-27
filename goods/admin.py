@@ -8,7 +8,7 @@ admin.site.register(Categories)
 class ProductsAdmin(admin.ModelAdmin):
     """Класс для кастомизации модели на панели админа"""
 
-    list_display = "slug", "name", "price", "quantity",
+    list_display = "code", "name", "price", "quantity",
     list_display_links = "name",
     list_editable = "price", "quantity"
     list_filter = "price", "quantity"

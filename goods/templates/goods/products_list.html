@@ -32,11 +32,13 @@
       </div>
     </div>
   {% endfor %}
+
+  </div>
+  <div></div>
   {% if user.is_staff %}
     <a class="btn btn-success" href="{% url 'goods:create'%}">Додати новий товар</a>
   {% endif %}
-  </div>
-  {% if is_paginated %}
+{% if is_paginated %}
   <div class="card-footer text-end p-3">
       <ul class="pagination justify-content-center">
     {% if page_obj.has_previous %}

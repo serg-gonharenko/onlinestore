@@ -1,6 +1,7 @@
 from goods.models import Products, Categories
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import CustomProductCreationForm
 
 
 class ProductsListView(ListView):
@@ -14,7 +15,8 @@ class ProductsDetailView(DetailView):
 
 class ProductsCreateView(CreateView):
     model = Products
-    fields = '__all__'
+    form_class = CustomProductCreationForm
+    template_name = 'goods/products_create.html'
     success_url = '/'
 
 
