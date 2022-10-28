@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}"РтК" Новий товар{% endblock %}
+{% block container %}
+    <h2>Введіть дані для товару</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <input class="btn btn-success" type="submit" value="Внести">
+      <input class="btn btn-success" type="reset" value="Очистити">
+      <a class="btn btn-success"  href="{% url 'homepage' %}" role="button">Скасувати</a>
+    </form>
+{% endblock %}

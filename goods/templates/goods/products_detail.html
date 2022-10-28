@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block container %}
+    <h2>{{object.name}}</h2>
+    <br>
+    <br>
+    Арт: {{ object.code }}
+    Цена: {{ object.price }}
+    <br>
+    <br>
+    <a class="btn btn-success" href="{% url 'goods:list' %}">B розробці</a>
+    <a class="btn btn-success" href="{% url 'goods:list' %}">Назад</a>
+{% endblock %}

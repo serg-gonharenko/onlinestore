@@ -1,57 +1,45 @@
-from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse_lazy, reverse
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
-from users.forms import RegisterForm, LoginForm, ProfileEdit
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView, LogoutView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView
+from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .models import CustomUserModel
 
 
-def user_profile_view(request: HttpRequest) -> HttpResponse:
-    """User profile view"""
-    if request.user.is_authenticated:
-        return render(request, "user_profile.html")
-    return HttpResponseRedirect(reverse_lazy("login"))
+class CustomLoginView(LoginView):
+    success_url = '/'
+    template_name = 'users/user_login.html'
+
+    def get_success_url(self):
+        return self.success_url
 
 
-def user_profile_edit_view(request: HttpRequest) -> HttpResponse:
-    if request.method == "POST":
-        if request.user.is_authenticated:
-            form = ProfileEdit(request.POST)
-            if form.is_valid():
-                form.save(request.user)
-                return HttpResponseRedirect(reverse_lazy("user_profile"))
-            return render(request, "user_profile_edit.html", {'form': form})
-        return HttpResponseRedirect(reverse_lazy("user_login"))
-    return HttpResponseRedirect(reverse_lazy("homepage"))
+class CustomRegisterView(CreateView):
+    form_class = CustomUserCreationForm
+    template_name = 'users/user_register.html'
+    success_url = '/'
 
 
-def login_view(request: HttpRequest) -> HttpResponse:
-    """Login user view"""
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            login(request, form.user)
-            return HttpResponseRedirect(reverse_lazy("homepage"))
-    else:
-        form = LoginForm()
-
-    return render(request, "user_login.html", {'form': form})
+class CustomLogoutView(LoginRequiredMixin, LogoutView):
+    next_page = '/'
 
 
-def register_view(request: HttpRequest) -> HttpResponse:
-    """ Register new user view """
-    if request.method == "POST":
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.create_user()
-            redirect_url = reverse("login")
-            return HttpResponseRedirect(redirect_url)
-    else:
-        form = RegisterForm()
-
-    return render(request, "user_register.html", {'form': form})
+class CustomDetailView(LoginRequiredMixin, DetailView):
+    model = CustomUserModel
+    template_name = 'users/user_profile.html'
 
 
-def logout_view(request: HttpRequest) -> HttpResponse:
-    logout(request)
-    return HttpResponseRedirect(reverse_lazy("homepage"))
+class CustomEditView(LoginRequiredMixin, UpdateView):
+    model = CustomUserModel
+    form_class = CustomUserChangeForm
+    template_name = 'users/user_profile_edit.html'
+    success_url = '/'
+
+    def get_success_url(self):
+        return self.success_url
+
+
+class CustomDeleteView(LoginRequiredMixin, DeleteView):
+    model = CustomUserModel
+    template_name = 'users/user_confirm_delete.html'
+    success_url = '/'

@@ -1,13 +1,13 @@
-""" Users App URL Configuration"""
-
 from django.urls import path
-from users.views import login_view, logout_view, register_view, user_profile_edit_view, user_profile_view
+from .views import CustomLoginView,\
+    CustomLogoutView, CustomRegisterView, CustomDetailView, CustomEditView, CustomDeleteView
 
+app_name = 'users'
 urlpatterns = [
-    path("register/", register_view, name="register"),
-    path("login/", login_view, name="login"),
-    path("profile/", user_profile_view, name="user_profile"),
-    path("logout/", logout_view, name="logout"),
-    path("profile/edit", user_profile_edit_view, name="profile_edit")
-
+    path('login/', CustomLoginView.as_view(), name='login'),
+    path('register/', CustomRegisterView.as_view(), name='register'),
+    path('logout/', CustomLogoutView.as_view(), name='logout'),
+    path('profile/<int:pk>/', CustomDetailView.as_view(), name='profile'),
+    path('profile/edit/<int:pk>/', CustomEditView.as_view(), name='edit'),
+    path('profile/delete/<int:pk>/', CustomDeleteView.as_view(), name='delete'),
 ]

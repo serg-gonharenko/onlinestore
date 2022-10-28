@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from onlinestore import views
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homepage, name="homepage"),
-    path('about/', views.about),
+    path('about/', TemplateView.as_view(template_name="about.html"), name="about"),
+    path('', include('goods.urls')),
     path('', include('users.urls')),
-    path('products/', views.homepage),
-    path('products/', include('goods.urls')),
+    path('', TemplateView.as_view(template_name="homepage.html"), name="homepage"),
 ]

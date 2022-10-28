@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% block container %}
+<div class="row row-cols-4">
+  {% for object in object_list %}
+    <div class="col mb-5">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{% static '258184_original.jpg' %} " alt="goods/258184_original.jpg">
+        <div class="card-body">
+          <h5 class="card-title">{{ object.name }}</h5>
+          <p class="card-text">Цена: {{ object.price }}</p>
+        {% if object.quantity %}
+          <p style="color: green">
+          В наявності: {{ object.quantity }}
+          </p>
+
+          <a class="btn btn-success" href="{% url 'goods:detail' pk=object.pk %}">Купити</a>
+          {% else %}
+            <p style="color: red">
+            Під замовлення
+            </p>
+            <a class="btn btn-success disabled"  href="{% url 'goods:detail' pk=object.pk %}">Купити</a>
+
+        {% endif %}
+        {% if user.is_staff %}
+          <br>
+          <br>
+          <a class="btn btn-success" href="{% url 'goods:update' pk=object.pk %}">Редагувати</a>
+          <a class="btn btn-success" href="{% url 'goods:delete' pk=object.pk %}">Видалити</a>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+  </div>
+  <div></div>
+  {% if user.is_staff %}
+    <a class="btn btn-success" href="{% url 'goods:create'%}">Додати новий товар</a>
+  {% endif %}
+{% if is_paginated %}
+  <div class="card-footer text-end p-3">
+      <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+        <li><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+    {% else %}
+      <li class="page-item disabled">
+      <span class="page-link">Previous</span>
+    {% endif %}
+    {% for i in page_obj.paginator.page_range %}
+      {% if page_obj.number == i %}
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">{{ i }}</span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+
+
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+            <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+    {% else %}
+      <li class="page-item disabled">
+      <span class="page-link">Next</span>
+    {% endif %}
+  </ul>
+  </div>
+  {% endif %}
+
+{% endblock %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>

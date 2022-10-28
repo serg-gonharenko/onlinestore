@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %} Profile Edit Page{% endblock %}
+{% block container %}
+    <br>
+    <h2>Ведіть дані</h2>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+      <input class="btn btn-success" type="submit" value="Прийняти">
+      <input class="btn btn-success" type="reset" value="Очистити">
+      <a class="btn btn-success"  href="{% url 'homepage' %}" role="button">Скасувати</a>
+    </form>
+{% endblock %}
